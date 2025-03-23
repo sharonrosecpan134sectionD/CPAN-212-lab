@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+</head>
+<body class="flex justify-center items-center h-screen bg-gray-100">
+  <div class="bg-white p-8 rounded shadow-md text-center">
+    <h2 class="text-xl font-bold mb-4">Buy “The Book of Wisdom”</h2>
+    <p class="mb-4 text-gray-600">₦3,000</p>
+    <button onclick="payWithPaystack()" class="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700">Pay Now</button>
+  </div>
+
+  <script>
+    function payWithPaystack() {
+      var handler = PaystackPop.setup({
+        key: 'pk_test_439d2198a9736f120020adc2fef18fb580f3e2b5', 
+        email: 'customer@example.com',
+        amount: 300000, // 3000 NGN in kobo
+        currency: 'NGN',
+        ref: '' + Math.floor(Math.random() * 1000000000 + 1),
+        callback: function(response) {
+          alert('Payment successful! Reference: ' + response.reference);
+          window.location.href = "confirmation.html";
+        },
+        onClose: function() {
+          alert('Transaction cancelled');
+        }
+      });
+      handler.openIframe();
+    }
+  </script>
+</body>
+</html>
+NdUMhVqbCMa4CboC
